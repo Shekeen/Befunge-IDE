@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QTextEdit>
 #include <QTableView>
+#include <QPushButton>
+#include "befungeinterpreter.h"
 
 class BefungeMainWindow : public QMainWindow
 {
@@ -12,6 +14,7 @@ class BefungeMainWindow : public QMainWindow
     QTextEdit *befunge_editor;
     QTextEdit *befunge_help;
     QTableView *stack_view;
+    QPushButton *btn_run;
 public:
     explicit BefungeMainWindow(QWidget *parent = 0);
 

@@ -1,9 +1,13 @@
 SOURCES += \
     main.cpp \
-    befungemainwindow.cpp
+    befungemainwindow.cpp \
+    befungeinterpreter.cpp
 
 HEADERS += \
-    befungemainwindow.h
+    befungemainwindow.h \
+    befungeinterpreter.h
+
+
 
 
 
