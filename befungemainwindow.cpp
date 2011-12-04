@@ -18,7 +18,11 @@ BefungeMainWindow::BefungeMainWindow(QWidget *parent) :
     centralWidget()->setLayout(layout_central);
 
     QGridLayout *layout_befunge_editor = new QGridLayout();
+    QHBoxLayout *layout_input_output = new QHBoxLayout();
     QHBoxLayout *layout_aux_widgets = new QHBoxLayout();
+
+    QVBoxLayout *layout_input = new QVBoxLayout();
+    QVBoxLayout *layout_output = new QVBoxLayout();
 
     QVBoxLayout *layout_stack = new QVBoxLayout();
     QVBoxLayout *layout_help = new QVBoxLayout();
@@ -28,6 +32,20 @@ BefungeMainWindow::BefungeMainWindow(QWidget *parent) :
     befunge_editor->ensureCursorVisible();
     befunge_editor->setLineWrapMode(QTextEdit::NoWrap);
     layout_befunge_editor->addWidget(befunge_editor);
+
+    befunge_input = new QTextEdit(this);
+    befunge_input->setFont(QFont("Verdana", 12));
+    befunge_input->ensureCursorVisible();
+    befunge_input->setLineWrapMode(QTextEdit::NoWrap);
+    layout_input->addWidget(new QLabel("Input", this));
+    layout_input->addWidget(befunge_input);
+
+    befunge_output = new QTextEdit(this);
+    befunge_output->setFont(QFont("Verdana", 12));
+    befunge_output->ensureCursorVisible();
+    befunge_output->setLineWrapMode(QTextEdit::NoWrap);
+    layout_output->addWidget(new QLabel("Output", this));
+    layout_output->addWidget(befunge_output);
 
     stack_view = new QTableView(this);
     layout_stack->addWidget(new QLabel("Stack", this));
@@ -74,7 +92,11 @@ BefungeMainWindow::BefungeMainWindow(QWidget *parent) :
     layout_aux_widgets->addItem(layout_stack);
     layout_aux_widgets->addItem(layout_help);
 
+    layout_input_output->addItem(layout_input);
+    layout_input_output->addItem(layout_output);
+
     layout_main->addItem(layout_befunge_editor);
+    layout_main->addItem(layout_input_output);
     layout_main->addItem(layout_aux_widgets);
 
     layout_central->addItem(layout_main);

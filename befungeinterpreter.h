@@ -16,12 +16,17 @@ class BefungeInterpreter : public QObject
     QPoint pos;
     Direction dir;
     QStack<long> stack;
+    bool string_mode;
+    bool program_end;
 
     void clearSource();
+    void interpretSymbol();
+    void moveCursor();
 public:
     explicit BefungeInterpreter(QObject *parent = 0);
 
     void loadSource(QString &src);
+    void runProgram();
 signals:
 
 public slots:

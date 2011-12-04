@@ -12,6 +12,8 @@ class BefungeMainWindow : public QMainWindow
     Q_OBJECT
 
     QTextEdit *befunge_editor;
+    QTextEdit *befunge_input;
+    QTextEdit *befunge_output;
     QTextEdit *befunge_help;
     QTableView *stack_view;
     QPushButton *btn_run;
