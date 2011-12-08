@@ -3,7 +3,7 @@
 #include <QDebug>
 
 BefungeInterpreter::BefungeInterpreter(QObject *parent) :
-    QObject(parent), pos(0, 0), dir(RIGHT), stack(), string_mode(false), program_end(false)
+    QObject(parent), pos(0, 0), dir(RIGHT), stack(), string_mode(false), program_end(false), input(NULL)
 {
     for (int x = 0; x < 80; x++) {
         for (int y = 0; y < 25; y++) {
@@ -41,7 +41,7 @@ void BefungeInterpreter::interpretSymbol()
 {
     long a, b, val;
     int x, y, random;
-    char out_char;
+    char out_char, in_char;
     if (!string_mode) {
         switch (source[pos.x()][pos.y()]) {
         case '+': //plus
@@ -163,10 +163,12 @@ void BefungeInterpreter::interpretSymbol()
             source[x][y] = (char)val;
             break;
         case '&':
-            //input value
+            *input >> val;
+            stack.push(val);
             break;
         case '~':
-            //input character
+            *input >> in_char;
+            stack.push((long)in_char);
             break;
         case '@':
             program_end = true;
@@ -205,4 +207,32 @@ void BefungeInterpreter::runProgram()
         interpretSymbol();
         moveCursor();
     }
+}
+
+void BefungeInterpreter::giveInput(QString &str)
+{
+    input_str = str;
+    if (input) delete input;
+    input = new QTextStream(&input_str, QIODevice::ReadOnly);
+}
+
+QString BefungeInterpreter::getOutput()
+{
+    return output;
+}
+
+void BefungeInterpreter::stepProgram()
+{
+    if (!program_end) {
+        interpretSymbol();
+        moveCursor();
+    }
+}
+
+void BefungeInterpreter::Run()
+{
+}
+
+void BefungeInterpreter::Step()
+{
 }
