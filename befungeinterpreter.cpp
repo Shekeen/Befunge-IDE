@@ -203,6 +203,8 @@ void BefungeInterpreter::moveCursor()
 
 void BefungeInterpreter::runProgram()
 {
+    pos.setX(0);
+    pos.setY(0);
     while (!program_end) {
         interpretSymbol();
         moveCursor();
